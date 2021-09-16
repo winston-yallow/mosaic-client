@@ -1,0 +1,213 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/FontInfo.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/FontAction.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/options/Options.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+
+void fragment() {
+	vec3 screen = textureLod(SCREEN_TEXTURE, SCREEN_UV, 3.0).rgb;
+	vec3 gray = vec3(0.21 * screen.r + 0.71 * screen.g + 0.07 * screen.b);
+	COLOR.rgb = gray * COLOR.rgb * 1.5;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="Options" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="Overlay" type="ColorRect" parent="."]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.0745098, 0.207843, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explanations" type="VBoxContainer" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -300.0
+margin_top = -225.0
+margin_right = 300.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 600, 450 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intro" type="Label" parent="Overlay/Explanations"]
+margin_right = 600.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "Work together with all other online players to reorder the fragments. A prompt will be shown in the top left corner. Vote once you feel like you completed the prompt. You will get a new prompt as soon as enough players voted."
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/Explanations"]
+margin_top = 137.0
+margin_right = 600.0
+margin_bottom = 202.0
+size_flags_vertical = 3
+custom_constants/separation = 60
+
+[node name="HBox" type="HBoxContainer" parent="Overlay/Explanations"]
+margin_top = 206.0
+margin_right = 600.0
+margin_bottom = 339.0
+custom_constants/separation = 12
+
+[node name="Movement" type="Label" parent="Overlay/Explanations/HBox"]
+margin_right = 135.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "MOVEMENT
+- WASD
+- Arrow Keys
+- Left Joystick"
+
+[node name="VSeparator" type="VSeparator" parent="Overlay/Explanations/HBox"]
+margin_left = 147.0
+margin_right = 151.0
+margin_bottom = 133.0
+
+[node name="Fragments" type="Label" parent="Overlay/Explanations/HBox"]
+margin_left = 163.0
+margin_right = 355.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "TAKE FRAGMENT
+- E
+- Space
+- A/B/X (Controller)"
+
+[node name="VSeparator2" type="VSeparator" parent="Overlay/Explanations/HBox"]
+margin_left = 367.0
+margin_right = 371.0
+margin_bottom = 133.0
+
+[node name="Vote" type="Label" parent="Overlay/Explanations/HBox"]
+margin_left = 383.0
+margin_right = 573.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "VOTE
+- F
+- Control
+- RB/R1 (Controller)"
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/Explanations"]
+margin_top = 343.0
+margin_right = 600.0
+margin_bottom = 409.0
+size_flags_vertical = 3
+custom_constants/separation = 60
+
+[node name="VBox" type="HBoxContainer" parent="Overlay/Explanations"]
+margin_top = 413.0
+margin_right = 600.0
+margin_bottom = 450.0
+
+[node name="BtnCredits" type="Button" parent="Overlay/Explanations/VBox"]
+margin_right = 298.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "[Credits]"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnResume" type="Button" parent="Overlay/Explanations/VBox"]
+margin_left = 302.0
+margin_right = 600.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "[Resume]"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Credits" type="VBoxContainer" parent="Overlay"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -225.0
+margin_right = 150.0
+margin_bottom = 225.0
+rect_min_size = Vector2( 300, 450 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Overlay/Credits"]
+margin_right = 300.0
+margin_bottom = 31.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "C R E D I T S"
+align = 1
+autowrap = true
+
+[node name="HSeparator3" type="HSeparator" parent="Overlay/Credits"]
+margin_top = 35.0
+margin_right = 300.0
+margin_bottom = 83.0
+size_flags_vertical = 3
+custom_constants/separation = 45
+
+[node name="Details" type="Label" parent="Overlay/Credits"]
+margin_top = 87.0
+margin_right = 300.0
+margin_bottom = 356.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "GAMEPLAY & VISUALS
+Winston Yallow
+
+AUDIO
+Kenney (CC0 License)
+
+FONT
+Poppins (OFL)"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/Credits"]
+margin_top = 360.0
+margin_right = 300.0
+margin_bottom = 409.0
+size_flags_vertical = 3
+custom_constants/separation = 45
+
+[node name="BtnBack" type="Button" parent="Overlay/Credits"]
+margin_top = 413.0
+margin_right = 300.0
+margin_bottom = 450.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "[Back]"
+flat = true
+
+[connection signal="pressed" from="Overlay/Explanations/VBox/BtnCredits" to="." method="credits"]
+[connection signal="pressed" from="Overlay/Explanations/VBox/BtnResume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Overlay/Credits/BtnBack" to="." method="_on_back_pressed"]

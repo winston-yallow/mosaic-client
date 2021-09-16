@@ -1,0 +1,106 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/board/Board.gd" type="Script" id=1]
+[ext_resource path="res://src/camera/SmoothCamera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/options/Options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/fonts/FontInfo.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/fonts/FontAction.tres" type="DynamicFont" id=5]
+[ext_resource path="res://assets/fonts/FontDetail.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/audio/jingles/jingles_SAX10.ogg" type="AudioStream" id=7]
+
+[node name="Board" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Border" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+antialiased = true
+invert_enable = true
+invert_border = 2000.0
+polygon = PoolVector2Array( -600, -400, 600, -400, 600, 400, -600, 400 )
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="SmoothCamera" parent="." instance=ExtResource( 2 )]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ColorRectPrompt" type="ColorRect" parent="HUD"]
+margin_right = 245.0
+margin_bottom = 70.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/ColorRectPrompt"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBox" type="VBoxContainer" parent="HUD/ColorRectPrompt/CenterContainer"]
+margin_left = 14.0
+margin_top = 9.0
+margin_right = 231.0
+margin_bottom = 60.0
+custom_constants/separation = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HUD/ColorRectPrompt/CenterContainer/VBox"]
+margin_right = 217.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 6 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "Rearrange fragments to look like:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="Label" parent="HUD/ColorRectPrompt/CenterContainer/VBox"]
+margin_top = 20.0
+margin_right = 217.0
+margin_bottom = 51.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRectVotes" type="ColorRect" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -150.0
+margin_top = -50.0
+color = Color( 0, 0, 0, 0.588235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Voting" type="Label" parent="HUD/ColorRectVotes"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.992157, 0.968627, 0.980392, 1 )
+text = "0/0 Votes"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+
+[node name="PromptChange" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
