@@ -12,3 +12,6 @@ data_*/
 
 # Exclude webrtc gdnative lib
 webrtc/
+
+# Exclude builds
+dist/
