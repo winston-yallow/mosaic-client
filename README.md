@@ -19,6 +19,19 @@ probably not the best approach.
 Most code files have at least a small description on the top. If you have questions don't hesitate
 to ask, I did not add many comments to the code.
 
+## Running the Project
+
+To run this project you will first need to start your own signalling server. You can download
+it from the [Mosaic Server](https://github.com/winston-yallow/mosaic-server) repo.
+
+After that you will need to edit the `src/network_mesh/NetworkMesh.gd` file.
+You should adjust the `_websocket_url` to point to your server (defaults to localhost)
+and add some STUN/TURN servers to `_ice_servers`.
+
+If you test this locally you can use an empty list of URLs. This will only work if clients
+can communicate with each other without the need to use STUN/TURN (for example multiple
+clients running on the same computer).
+
 ## Licenses
 
 My code: MIT License
